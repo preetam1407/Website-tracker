@@ -16,7 +16,7 @@
 <details>
   <summary>🛠️ Steps to Run the Chrome Extension in Developer Mode</summary>
 
-1. **Open Chrome Browser**: Ensure you have Google Chrome installed.
+1. **Open Browser**: Preferably Chrome, others may also work.
 2. **Navigate to Extensions**: 
    - Click on the three vertical dots in the top-right corner 📍.
    - Hover over "More Tools" and select "Extensions". Or directly type `chrome://extensions/` in the address bar and hit `Enter`.
