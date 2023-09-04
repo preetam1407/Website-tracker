@@ -1,25 +1,30 @@
-# Website-tracker
-Conceived, designed, and implemented a real-time website activity tracker to monitor user behaviors on web pages.
-Leveraged HTML, CSS, and JavaScript for frontend development and interactivity.
-Tapped into Chrome's local storage through Chrome API for efficient data capture, retrieval, and visualization of user activity.
-Crafted interactive UI components, including dynamic graphs, to represent users' daily website interactions.
-Enriched the tracker's capabilities by incorporating customization options and timely notifications for users.
+# Website-tracker 🌍
+> Conceived, designed, and implemented a real-time website activity tracker to monitor user behaviors on web pages.
 
-Running the Chrome Extension in Developer Mode
-Open Chrome Browser: Ensure that you have Google Chrome installed on your machine.
+![HTML Badge](https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS Badge](https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript Badge](https://img.shields.io/badge/-JavaScript-black?style=flat&logo=javascript)
+![Chrome Badge](https://img.shields.io/badge/-Chrome-4285F4?style=flat&logo=google-chrome&logoColor=white)
 
-Navigate to Extensions:
+## Features 🚀
+- ***Techstack***: Utilized **HTML, CSS, JavaScript**, and various **Chrome API** modules including Storage, Notification, and Action API.
+- ***Functionality***:
+  - ⏰ **Time Analytics**: Gain insights into your most used websites and time allocation.
+  - 📈 **Detailed Data**: Access comprehensive data for all visited websites and track your activity.
+  - 🔔 **Notification Suite**: Benefit from both global and website-specific notifications with customizable periodic reminders.
 
-Click on the three vertical dots in the top-right corner of the browser to open the menu.
-Hover over "More Tools" and select "Extensions" from the submenu. Alternatively, you can type chrome://extensions/ in the address bar and press Enter.
-Enable Developer Mode:
+<details>
+  <summary>🛠️ Steps to Run the Chrome Extension in Developer Mode</summary>
 
-On the top-right corner of the "Extensions" page, you'll see a toggle for "Developer mode". Turn this on.
-Load Unpacked Extension:
-
-After enabling the Developer mode, you'll see more options at the top left: Load unpacked, Pack extension, and Update.
-Click on Load unpacked.
-Select Your Extension's Directory:
-
-A file dialog will open. Navigate to the directory where your extension's files are (for example, the manifest.json file and other resources).
-Select the directory by clicking on the "Select Folder" button.
+1. **Open Chrome Browser**: Ensure you have Google Chrome installed.
+2. **Navigate to Extensions**: 
+   - Click on the three vertical dots in the top-right corner 📍.
+   - Hover over "More Tools" and select "Extensions". Or directly type `chrome://extensions/` in the address bar and hit `Enter`.
+3. **Enable Developer Mode**: 
+   - Look for the "Developer mode" toggle in the top-right corner and activate it.
+4. **Load Unpacked Extension**: 
+   - You'll now see options: `Load unpacked`, `Pack extension`, and `Update`. Choose `Load unpacked`.
+5. **Pick Your Extension's Directory**: 
+   - A file browser will pop up. Navigate to where your extension's resources reside (like `manifest.json`).
+   - Confirm your selection by pressing the "Select Folder" button.
+</details>
