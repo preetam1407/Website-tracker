@@ -1,0 +1,335 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 400px;
+}
+
+.container h1 {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 600;
+  color: #4f565d;
+  transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  vertical-align: middle;
+}
+
+.container h1:hover {
+  color: #221a1c;
+  transform: scale(1.05);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.container img {
+  display: inline-block;
+  height: 35px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+#home {
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 2px;
+}
+
+.allbtn a {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.allbtn button {
+  background: transparent;
+  border: 3px solid #0acaf1;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(45, 128, 195, 0.3);
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+#home:hover, 
+#showAllStats:hover, 
+#customizationBtn:hover, 
+#summeryBtn:hover {
+  background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+  box-shadow: 0 4px 8px 0 rgba(45, 54, 65, 0.75);
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  color: #ffffff;
+  background-color: #e0e0e0;
+}
+
+.bn632-hover.bn25 {
+  width: 100px;
+  height: 33px;
+  font-size: 12px;
+  margin: 1px;
+  text-align: center;
+}
+
+
+.allbtn button.active{
+  /* Replicate the hover effect here */
+  background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+  box-shadow: 0 4px 8px 0 rgba(45, 54, 65, 0.75);
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  color: #ffffff;
+  background-color: #e0e0e0;
+}
+
+.home button.active{
+  /* Replicate the hover effect here */
+  background: transparent;
+  border: 3px solid #0acaf1;
+  padding: 2px 3px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(45, 128, 195, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.topwebsitesheading, 
+.notification-heading, 
+#restrictedheading {
+  font-size: 15px;
+  margin-left: 25px;
+  font-weight: 500;
+}
+
+#topWebsitesTable {
+  margin-top: -5px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+
+.table th, 
+.table td {
+  padding: 8px 1px;
+  border: 5px solid #ccc;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+.table th:nth-child(2), 
+.table th:nth-child(3) {
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  background-color: #f2f2f2;
+}
+
+.totaltimeheading {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1d1f20;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.notification-section {
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 90%; 
+  max-width: 400px;
+  margin-left: 20px;
+}
+
+.notification-section, .notification-section * {
+  box-sizing: border-box;
+}
+
+
+.notification-heading p {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+#notify {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.inputclass, #specificWebsite, #specificThreshold {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  transition: border-color 0.2s;
+}
+
+.inputclass:focus, #specificWebsite:focus, #specificThreshold:focus {
+  border-color: #0acaf1;
+  outline: none;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+#setNotificationLimitBtn, #setgloballimitBtn, #setThreshold {
+  margin-top: 1px;
+  padding: 10px 15px;
+  background-color: #0acaf1;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  align-self: flex-start;
+}
+
+#setNotificationLimitBtn:hover, #setgloballimitBtn:hover, #setThreshold:hover {
+  background-color: #0acaf1;
+  transform: scale(1.05);
+}
+
+
+.tick-mark {
+  display: none;
+  color: green;
+  font-size: 20px;
+  margin-left: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.error-message {
+  color: red;
+  display: none;
+  font-size: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px; 
+}
+
+
+#notificationType {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  transition: border-color 0.2s;
+}
+
+#notificationType:focus {
+  border-color: #0acaf1;
+  outline: none;
+  box-shadow: 0 0 3px #0acaf1(0, 123, 255, 0.5);
+}
+
+label {
+  font-weight: 600;
+  margin-right: 15px;
+  font-size: 14px;
+}
+
+#setgloballimitBtn, #setThreshold {
+  margin-bottom: 10px; /* adjust value as required */
+}
+
+
+.input-group {
+  margin-bottom: 10px; /* adjust value as required */
+}
+
+#setThreshold {
+  margin-top: 10px; /* adjust value as required */
+}
+
+
+
+.table-containe{
+  border-radius: 5px;
+  overflow: hidden; /* Makes sure the table adheres to the rounded border of the container */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px; /* Adjust as per your design's requirement */
+  font-family: Arial, sans-serif; /* Default font. Can be changed */
+}
+
+#dataTable {
+  width: 80%;
+  border-collapse: collapse;
+}
+
+#dataTable th {
+  background-color: #29323c;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 20px;
+}
+
+#dataTable td {
+  padding: 10px 20px;
+  border-bottom: 1px solid #e0e0e0; /* Light gray border for each row */
+}
+
+#dataTable tr:hover {
+  background-color: #f7f7f7; /* Subtle gray background color on hover for better interactivity */
+}
+
+/* Remove the border-bottom from the last table row */
+#dataTable tr:last-child td {
+  border-bottom: none;
+}
+
+
+.copy-btn {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.copy-btn:hover {
+  background-color: #e0e0e0;
+}
+
+
+
+#barContainer {
+  height: 300px;
+  width: 400px;
+  position: relative;
+  border: 1px solid #000;  /* Added a border for visibility. */
+}
+
+
