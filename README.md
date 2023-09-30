@@ -29,3 +29,10 @@
    - A file browser will pop up. Navigate to where your extension's resources reside (like `manifest.json`).
    - Confirm your selection by pressing the "Select Folder" button.
 </details>
+
+
+![Example Image](images/Home.png)
+![Example Image](images/detailed_stats.png)
+![Example Image](images/notification.png)
+![Example Image](images/restriction.png)
+
