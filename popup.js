@@ -12,6 +12,7 @@ function getDateString(nDate) {
   return presentDate;
 }
 
+
 function getPreviousMonthDateString(nDate) {
   let nDateMonth = nDate.getMonth();
   let nDateYear = nDate.getFullYear();
@@ -25,6 +26,7 @@ function getPreviousMonthDateString(nDate) {
   let previousMonthDate = "" + nDateYear + "-" + nDateMonth + "-01";
   return previousMonthDate;
 }
+
 
 function getDomain(tablink) {
   let url = tablink[0].url;
@@ -177,8 +179,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var totalWebsitesContainer = document.getElementById("dataTable");
   var notificationSection = document.querySelector(".notification-section");
   var notificationHeading = document.querySelector(".notification-heading");
-  var restrictedheading = document.getElementById("restrictedheading");
-  var restrictedsection = document.getElementById("restrictedsection");
   var summeryheading = document.getElementById("summeryheading");
   var chartCanvas = document.getElementById("chartCanvas");
   const buttons = document.querySelectorAll('.allbtn button');
@@ -233,6 +233,7 @@ function validateInput(inputId, errorId) {
   }
 }
 
+
 document.getElementById("setgloballimitBtn").addEventListener("click", function() {
   // Validate input
   if (!validateInput("globallimit", "errorGlobalLimit")) return;
@@ -266,16 +267,140 @@ document.getElementById('setThreshold').addEventListener('click', function() {
 
       chrome.storage.sync.set({ 'websiteThresholds': websiteThresholds });
   });
+
   
-  // Toggle button and tick mark
   handleButtonClick("setThreshold", "tickMarkThreshold");
 });
 
   function updateUIWithStoredData() {
     displayTotalWebsites();
     displayTopWebsites();
-    
   }
+
+  function drawGraph(dates, timeSpent) {
+    const canvas = document.getElementById("chartCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const padding = 50;
+    const labelPadding = 10;
+    const graphWidth = canvas.width - 2 * padding;
+    const graphHeight = canvas.height - 2 * padding;
+
+    const maxYValue = 24 * 60; // total minutes in 24 hours
+    const yScale = graphHeight / maxYValue;
+
+    // Draw X & Y axes
+    ctx.beginPath();
+    ctx.moveTo(padding, padding);
+    ctx.lineTo(padding, canvas.height - padding);
+    ctx.lineTo(canvas.width - padding, canvas.height - padding);
+    ctx.stroke();
+
+    const pointSpace = graphWidth / 6; // 6 gaps for 7 points
+
+    for (let i = 0; i < dates.length; i++) {
+        const x = padding + i * pointSpace;
+
+        if (timeSpent[i] !== null) { // only draw point and line if data exists
+            const y = canvas.height - padding - timeSpent[i] * yScale;
+
+            // Draw the point
+            ctx.fillStyle = "#3498db";
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // If it's not the first point, draw the line
+            if (i > 0 && timeSpent[i-1] !== null) {
+                const prevY = canvas.height - padding - timeSpent[i-1] * yScale;
+                ctx.beginPath();
+                ctx.moveTo(x - pointSpace, prevY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            }
+        }
+
+        // Draw date on X axis
+        ctx.fillStyle = "#000";
+        ctx.fillText(dates[i], x, canvas.height - padding + labelPadding * 2);
+    }
+
+    // Draw hours and minutes on Y axis
+    for (let i = 0; i <= maxYValue; i+=60) {
+        const y = canvas.height - padding - i * yScale;
+        ctx.fillText(i/60 + "h", padding - labelPadding * 3, y);
+    }
+}
+
+// This function will prepare the data and call the drawGraph function
+function plotGraphData() {
+    // Get the past seven days
+    const today = new Date();
+    const dates = Array.from({ length: 7 }, (_, i) => {
+        const d = new Date(today);
+        d.setDate(today.getDate() - (6 - i)); // Start from 6 days ago to today
+        return d.toISOString().split('T')[0]; // Return in 'YYYY-MM-DD' format
+    });
+
+    chrome.storage.local.get("dailyTotals", function(data) {
+        let dailyTotals = data.dailyTotals || [];
+
+        // Map the past seven days to their stored data or null
+        const timeSpent = dates.map(date => {
+            const entry = dailyTotals.find(e => e.date === date);
+            return entry ? entry.total : null;
+        });
+
+        drawGraph(dates, timeSpent);
+    });
+}
+
+// Call plotGraphData on window load or other suitable event
+window.onload = plotGraphData();
+
+function storeRestrictedWebsite(website, restrictionType) {
+  if (!website || !restrictionType) {
+      console.error("Both website and restrictionType are required to store a restricted website.");
+      return;
+  }
+
+  // Fetch the existing restricted websites from storage
+  chrome.storage.local.get("restrictedWebsites", function(data) {
+      let restrictedWebsites = data.restrictedWebsites || [];
+
+      // Check if the website is already in the list
+      const websiteIndex = restrictedWebsites.findIndex(entry => entry.website === website);
+
+      if (websiteIndex !== -1) {
+          // If the website is already in the list, update its restriction type
+          restrictedWebsites[websiteIndex].restrictionType = restrictionType;
+      } else {
+          // If the website is new, add it to the list
+          restrictedWebsites.push({ website: website, restrictionType: restrictionType });
+      }
+
+      // Store the updated list of restricted websites back in storage
+      chrome.storage.local.set({ restrictedWebsites: restrictedWebsites }, function() {
+          if (chrome.runtime.lastError) {
+              console.error("There was an error storing the restricted website: ", chrome.runtime.lastError);
+          } else {
+              console.log("Restricted website stored successfully!");
+          }
+      });
+  });
+}
+
+document.getElementById("setRestriction").addEventListener("click", function() {
+  const website = document.getElementById("specificRestrictedWebsite").value.trim();
+  const restrictionType = document.getElementById("restrictionType").value;
+
+  if (website && restrictionType) {
+      storeRestrictedWebsite(website, restrictionType);
+  } else {
+      console.error("Please provide valid inputs for both website and restriction type.");
+  }
+});
+
 
 
   homebtn.addEventListener("click", function () {
@@ -286,8 +411,6 @@ document.getElementById('setThreshold').addEventListener('click', function() {
     totalWebsitesContainer.style.display = "none"; // Hide the "Total Usage Websites" table container
     notificationHeading.style.display = "none";
     notificationSection.style.display = "none";
-    restrictedheading.style.display = "none";
-    restrictedsection.style.display = "none";
     summeryheading.style.display = "none";
     chartCanvas.style.display = "none";
 });
@@ -301,8 +424,6 @@ showStatsButton.addEventListener("click", function () {
     totalWebsitesContainer.style.display = "block"; // Show the "Total Usage Websites" table container
     notificationHeading.style.display = "none";
     notificationSection.style.display = "none";
-    restrictedheading.style.display = "none";
-    restrictedsection.style.display = "none";
     summeryheading.style.display = "none";
     chartCanvas.style.display = "none";
 });
@@ -310,8 +431,6 @@ showStatsButton.addEventListener("click", function () {
   customizationButton.addEventListener("click", function () {
         notificationSection.style.display = "block";
         notificationHeading.style.display = "block";
-        restrictedheading.style.display = "block";
-        restrictedsection.style.display = "block";
         totaltimeheading.style.display = "none"; 
         topwebsitesheading.style.display = "none";
         totaltimeheading.style.display = "none";  
@@ -327,8 +446,6 @@ showStatsButton.addEventListener("click", function () {
 summerybutton.addEventListener("click", function () {
         notificationSection.style.display = "none";
         notificationHeading.style.display = "none";
-        restrictedheading.style.display = "none";
-        restrictedsection.style.display = "none";
         totaltimeheading.style.display = "none"; 
         topwebsitesheading.style.display = "none";
         totaltimeheading.style.display = "none";  
@@ -338,158 +455,8 @@ summerybutton.addEventListener("click", function () {
         totaltime.style.display = "none";
         summeryheading.style.display = "block";
         chartCanvas.style.display = "block";
+        plotGraphData();
 });
 
 updateUIWithStoredData();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//   const setnotificationtime = document.getElementById("setNotificationLimitBtn");
-//   const notificationtime = document.getElementById("notificationLimit");
-
-//   setnotificationtime.addEventListener("click", () => {
-//     chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (tabs) {
-//       if (tabs.length === 0) {
-//         alert("No active tab found.");
-//       } else {
-//         const activeTab = tabs[0];
-//         const tabUrl = activeTab.url;
-//         const domain = tabUrl.split("/")[2];
-//         const notificationLimitMinutes = parseInt(notificationtime.value);
-//         const notificationKey = `${domain}`;
-//         chrome.storage.local.set({ [notificationKey]: notificationLimitMinutes }, function () {
-//           alert(`Notification time set to ${notificationLimitMinutes} minutes for ${domain}.`);
-//         });
-//       }
-//     });
-//   });
-
-
-
-//   // Function to check badge time and show notifications
-//   function checkBadgeTimeAndNotify() {
-//     chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (tabs) {
-//       if (tabs.length > 0) {
-//         const activeTab = tabs[0];
-//         const domain = activeTab.url.split("/")[2];
-//         const notificationKey = `${domain}`;
-
-//         chrome.storage.local.get([notificationKey], function (result) {
-//           const notificationLimitMinutes = parseInt(result[notificationKey]) || 0;
-
-//           // Get the badge text of the active tab
-//           // chrome.action.getBadgeText({ tabId: activeTab.id }, function (badgeText) {
-//             for (let i = 0; i < allKeys.length; i++) {
-//             if (notificationLimitMinutes <= sortedTimeList[i][1] && sortedTimeList[i][0] == domain) {
-//               var notificationOptions = {
-//                 type: "basic",
-//                 title: `You have spent ${notificationLimitMinutes} minutes on this page, exceeding the ${notificationLimitMinutes} minute limit for ${domain}.`,
-//                 message: "https://iq.opengenus.org",
-//                 iconUrl: "icons/icon128.png"
-//               };
-
-//               // Use chrome.runtime instead of this.registration to access showNotification
-//               chrome.notifications.create(null, notificationOptions, function () {
-//                 // Notification callback
-//               });
-//             }
-//           }
-//         });
-//       }
-//     });
-//   }
-
-//   // Set up an interval to periodically check badge time and notify
-//   const notificationInterval = setInterval(checkBadgeTimeAndNotify, 6000); // Check every 60 seconds
-
-//   // Add a listener to stop the interval when the popup is closed
-//   window.addEventListener('beforeunload', function () {
-//     clearInterval(notificationInterval);
-//   });
-
-//   // Initial check when the popup is opened
-//   checkBadgeTimeAndNotify();
-// });
-
-// // Function to parse badge time to minutes
-// function parseBadgeTimeToMinutes(badgeTime) {
-//   const timeParts = badgeTime.split(" ");
-//   let totalMinutes = 0;
-
-//   for (let i = 0; i < timeParts.length; i += 2) {
-//     const value = parseInt(timeParts[i]);
-//     const unit = timeParts[i + 1];
-
-//     if (!isNaN(value)) {
-//       if (unit.includes("sec")) {
-//         totalMinutes += value / 60;
-//       } else if (unit.includes("min")) {
-//         totalMinutes += value;
-//       } else if (unit.includes("hrs")) {
-//         totalMinutes += value * 60;
-//       }
-//     }
-//   }
-
-//   return totalMinutes;
-// }
