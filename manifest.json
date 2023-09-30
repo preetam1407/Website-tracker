@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Productive Browsing Tracker",
+  "version": "1.0.0",
+  "description": "Track and manage your browsing habits for a healthier online experience.",
+  "icons": {
+    "16": "popup/icons/fast-time.png",
+    "48": "popup/icons/fast-time.png",
+    "128": "popup/icons/fast-time.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "popup/icons/fast-time.png",
+    "48": "popup/icons/fast-time.png",
+    "128": "popup/icons/fast-time.png"
+    },
+    "default_title": "Healthy Browsing Tracker"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "idle",
+    "unlimitedStorage",
+    "notifications",
+    "alarms",
+    "webNavigation",
+    "nativeMessaging"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "options_page": "options.html",
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+
+  ]
+}
+

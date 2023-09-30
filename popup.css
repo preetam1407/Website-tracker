@@ -167,23 +167,28 @@ body {
   box-sizing: border-box;
 }
 
-
 .notification-heading p {
   margin-top: 20px;
-  margin-left: 20px;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 5px;
   color: #333;
 }
 
+.restriction-heading{
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
 #notify {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.inputclass, #specificWebsite, #specificThreshold {
+.inputclass, #specificWebsite, #specificThreshold, #restrictedsection{
   width: 100%;
   padding: 8px 12px;
   border: 1px solid #ccc;
@@ -200,7 +205,7 @@ body {
   box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
 }
 
-#setNotificationLimitBtn, #setgloballimitBtn, #setThreshold {
+#setNotificationLimitBtn, #setgloballimitBtn, #setThreshold, #restrictwebsite {
   margin-top: 1px;
   padding: 10px 15px;
   background-color: #0acaf1;
@@ -212,7 +217,7 @@ body {
   align-self: flex-start;
 }
 
-#setNotificationLimitBtn:hover, #setgloballimitBtn:hover, #setThreshold:hover {
+#setNotificationLimitBtn:hover, #setgloballimitBtn:hover, #setThreshold:hover, #restrictwebsite:hover {
   background-color: #0acaf1;
   transform: scale(1.05);
 }
@@ -257,11 +262,13 @@ label {
   font-size: 14px;
 }
 
-#setgloballimitBtn, #setThreshold {
+#setgloballimitBtn, #setThreshold, #restrictwebsite {
   margin-bottom: 10px; /* adjust value as required */
 }
 
-
+#restricted-field{
+  margin-top: 30px; /* adjust value as required */
+}
 .input-group {
   margin-bottom: 10px; /* adjust value as required */
 }
@@ -269,8 +276,13 @@ label {
 #setThreshold {
   margin-top: 10px; /* adjust value as required */
 }
+#restrictedsection{
+  margin-top: 10px; /* adjust value as required */
+}
 
-
+#restrictwebsite{
+  margin-top: 10px; /* adjust value as required */
+}
 
 .table-containe{
   border-radius: 5px;
@@ -325,11 +337,89 @@ label {
 
 
 
-#barContainer {
-  height: 300px;
-  width: 400px;
-  position: relative;
-  border: 1px solid #000;  /* Added a border for visibility. */
+
+/* Existing color references from your CSS */
+/* ... (unchanged) ... */
+
+/* Updated styles */
+
+#restrictNotify {
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 90%; 
+  max-width: 400px;
+  margin-left: 20px;
 }
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #29323c; /* Dark gray-blue for the label */
+}
+
+.input-group input{
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #0acaf1;
+  border-radius: 5px;
+  background-color: #e0e0e0; /* Light gray background */
+  color: #29323c; /* Dark gray-blue for the text */
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus{
+  border-color: #2b5876;
+  box-shadow: 0 0 3px rgba(43, 88, 118, 0.5);
+}
+
+#restrictionType {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  transition: border-color 0.2s;
+}
+
+#restrictionType:focus {
+  border-color: #0acaf1;
+  outline: none;
+  box-shadow: 0 0 3px #0acaf1(0, 123, 255, 0.5);
+}
+
+#setRestriction {
+  margin-top: 10px;
+  background-color: #0acaf1;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+#setRestriction:hover {
+  background-color: #2b5876;
+  transform: scale(1.05);
+}
+
+#tickMarkRestricted, #tickMarkRestriction {
+  color: green;
+  font-size: 20px;
+  margin-left: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+#errorRestricted, #errorSpecificWebsite {
+  color: red;
+  display: none;
+  font-size: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px; 
+}
+
 
 
