@@ -36,6 +36,7 @@
     </div>
 
 
+
     <div id="topWebsitesTable" class="table-container">
         <table class="styled-table">
             <thead>
@@ -51,10 +52,13 @@
 
 
 
+
+
     <div class="totaltimeheading">
     <p>Total Time Spent: <span id="totalTimeSpent"></span></p>
   </div>
 
+  
   
     <div>
         <table class="table-containe" id="dataTable" style="display:none;">
@@ -63,9 +67,23 @@
                     <th scope="col">#</th>
                     <th scope="col">Website</th>
                     <th scope="col">Time Spent</th>   
+                    <th scope="col">Time Spent</th>   
                 </tr>
             </thead>
             <tbody id="todayWebList"></tbody>
+        </table>
+    </div>
+
+    <div>
+        <table class="table-containe" id="dataTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Website</th>
+                    <th scope="col">Res. Type</th>   
+                </tr>
+            </thead>
+            <tbody id="restrictionwebsitelist"></tbody>
         </table>
     </div>
 
@@ -102,10 +120,12 @@
                     <input type="text" id="specificWebsite">
                 </div>
 
+
                 <div>
                 <label for="specificThreshold">Threshold (minutes):</label>
                 <input type="number" id="specificThreshold">
                 </div>
+
 
                 <select id="notificationType">
                     <option value="one-time">One Time</option>
@@ -113,11 +133,19 @@
                 </select>
 
                 <button id="setThreshold">Specific Webite Limit</button>
+
+                <button id="setThreshold">Specific Webite Limit</button>
                 <div id="tickMarkThreshold" class="tick-mark"  style="display: none;">&#10003;</div>
+
+
 
 
             </div>
             
+        </div>
+   
+        <div  class="restriction-heading">
+            <p>Set Restriction for URL</p>
         </div>
    
         <div  class="restriction-heading">
@@ -142,6 +170,25 @@
 
 
 </div>
+        <div id="errorSpecificWebsite" class="error-message" >Please enter a valid website!</div>
+        
+        <div class="input-group">
+            <label for="specificRestrictedWebsite">Website:</label>
+            <input type="text" id="specificRestrictedWebsite">
+        </div>
+
+        <label for="restrictionType">Restriction (type):</label>
+        <select id="restrictionType">
+            <option value="block">Block</option>
+            <option value="warn">Warn</option>
+        </select>
+
+        <button id="setRestriction">Set Restriction</button>
+        <div id="tickMarkRestriction" class="tick-mark" style="display: none;">&#10003;</div>
+
+
+</div>
+
 
 
     <div id = "summeryheading" class="container" style="display:none;">

@@ -182,12 +182,20 @@ body {
   margin-bottom: 5px;
   color: #333;
 }
+.restriction-heading{
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
 #notify {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+.inputclass, #specificWebsite, #specificThreshold, #restrictedsection{
 .inputclass, #specificWebsite, #specificThreshold, #restrictedsection{
   width: 100%;
   padding: 8px 12px;
@@ -206,6 +214,7 @@ body {
 }
 
 #setNotificationLimitBtn, #setgloballimitBtn, #setThreshold, #restrictwebsite {
+#setNotificationLimitBtn, #setgloballimitBtn, #setThreshold, #restrictwebsite {
   margin-top: 1px;
   padding: 10px 15px;
   background-color: #0acaf1;
@@ -217,6 +226,7 @@ body {
   align-self: flex-start;
 }
 
+#setNotificationLimitBtn:hover, #setgloballimitBtn:hover, #setThreshold:hover, #restrictwebsite:hover {
 #setNotificationLimitBtn:hover, #setgloballimitBtn:hover, #setThreshold:hover, #restrictwebsite:hover {
   background-color: #0acaf1;
   transform: scale(1.05);
@@ -263,9 +273,13 @@ label {
 }
 
 #setgloballimitBtn, #setThreshold, #restrictwebsite {
+#setgloballimitBtn, #setThreshold, #restrictwebsite {
   margin-bottom: 10px; /* adjust value as required */
 }
 
+#restricted-field{
+  margin-top: 30px; /* adjust value as required */
+}
 #restricted-field{
   margin-top: 30px; /* adjust value as required */
 }
@@ -279,7 +293,13 @@ label {
 #restrictedsection{
   margin-top: 10px; /* adjust value as required */
 }
+#restrictedsection{
+  margin-top: 10px; /* adjust value as required */
+}
 
+#restrictwebsite{
+  margin-top: 10px; /* adjust value as required */
+}
 #restrictwebsite{
   margin-top: 10px; /* adjust value as required */
 }
