@@ -85,9 +85,9 @@ function updateDailyTotal() {
             const todayIndex = dailyTotals.findIndex(entry => entry.date === today);
             
             if (todayIndex !== -1) {
-                dailyTotals[todayIndex].total = todayTotal; // Update today's total
+                dailyTotals[todayIndex].total = todayTotal; 
             } else {
-                dailyTotals.push({ date: today, total: todayTotal }); // Add new day's data
+                dailyTotals.push({ date: today, total: todayTotal }); 
             }
             
             // Ensure we only keep the last 7 days of data
@@ -96,7 +96,7 @@ function updateDailyTotal() {
             }
             
             
-            // Store the updated data
+           
             chrome.storage.local.set({ dailyTotals: dailyTotals });
 
             console.log("Daily totals for the last 7 days:");
@@ -108,9 +108,8 @@ function updateDailyTotal() {
 }
 
 // Start updating the daily total every 10 seconds
-const DAILY_TOTAL_UPDATE_INTERVAL = 10000;  // 10 seconds in milliseconds
+const DAILY_TOTAL_UPDATE_INTERVAL = 10000;  
 setInterval(updateDailyTotal, DAILY_TOTAL_UPDATE_INTERVAL);
-
 
 
 function checkTimeAgainstGlobalLimit(domain, timeSpent) {
@@ -222,6 +221,3 @@ chrome.tabs.onRemoved.addListener(function() {
 
 // Initialize timer on extension load.
 checkAndUpdateTimer();
-
-
-
