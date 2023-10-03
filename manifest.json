@@ -4,16 +4,16 @@
   "version": "1.0.0",
   "description": "Track and manage your browsing habits for a healthier online experience.",
   "icons": {
-    "16": "icons/fast-time.png",
-    "48": "icons/fast-time.png",
-    "128": "icons/fast-time.png"
+    "16": "popup/icons/fast-time.png",
+    "48": "popup/icons/fast-time.png",
+    "128": "popup/icons/fast-time.png"
   },
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "popup/popup.html",
     "default_icon": {
-    "16": "icons/fast-time.png",
-    "48": "icons/fast-time.png",
-    "128": "icons/fast-time.png"
+      "16": "popup/icons/fast-time.png",
+    "48": "popup/icons/fast-time.png",
+    "128": "popup/icons/fast-time.png"
     },
     "default_title": "Healthy Browsing Tracker"
   },
@@ -30,6 +30,16 @@
   ],
   "background": {
     "service_worker": "background.js"
-  }
+  },
+
+  "options_page": "options.html",
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+
+  ]
 }
 
